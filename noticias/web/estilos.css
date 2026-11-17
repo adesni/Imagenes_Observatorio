@@ -15,16 +15,18 @@
 
 :root {
   color-scheme: light dark;
-  --fondo: #f8f3ea;
-  --panel: #fffdf8;
-  --tinta: #2b1b3d;          /* berenjena */
-  --tenue: #6b6076;
-  --linea: #e3d9d0;
-  --violeta: #6b2fbf;
-  --violeta-suave: #efe6fb;
-  --verde: #2f7d4f;
-  --oro: #d19a1a;
-  --rubor: #f29bb5;
+  /* Paleta "Lila, menta y rosa mexicano" */
+  --fondo: #f4eeff;
+  --panel: #fcf9ff;
+  --tinta: #261447;
+  --tenue: #63557e;
+  --linea: #dcd0f1;
+  --violeta: #6a2fd0;
+  --violeta-suave: #e6dbff;
+  --menta: #14b8a6;          /* olas y hoja */
+  --menta-texto: #0b7d72;    /* la misma menta, oscurecida para que el texto se lea */
+  --rosa: #e4007c;           /* rosa mexicano */
+  --rubor: #ff8fc0;
   --sube: #17703f;
   --baja: #b3261e;
   --o-izquierda: #b3262d;
@@ -37,16 +39,17 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --fondo: #17111f;
-    --panel: #211a2c;
-    --tinta: #f0e9f7;
-    --tenue: #a99db8;
-    --linea: #3a2f49;
-    --violeta: #b794f6;
-    --violeta-suave: #2c2140;
-    --verde: #6fcf97;
-    --oro: #f0b93a;
-    --rubor: #f29bb5;
+    --fondo: #150f24;
+    --panel: #1f1733;
+    --tinta: #f1eaff;
+    --tenue: #a99dc4;
+    --linea: #382b55;
+    --violeta: #b08cff;
+    --violeta-suave: #2a1f47;
+    --menta: #3dd9c5;
+    --menta-texto: #3dd9c5;
+    --rosa: #ff5fa8;
+    --rubor: #ff8fc0;
     --sube: #5fcf8f;
     --baja: #ff8a80;
     --o-izquierda: #ef6b70;
@@ -87,12 +90,12 @@ a { color: inherit; }
 .serpiente { display: block; width: min(372px, 88%); height: auto; margin: 6px auto 0; }
 .serpiente .cuerpo { stroke: var(--violeta); }
 .serpiente .cabeza { fill: var(--violeta); }
-.serpiente .corona { fill: var(--oro); }
+.serpiente .corona { fill: var(--rosa); }
 .serpiente .ojo { fill: var(--fondo); }
 .serpiente .rubor { fill: var(--rubor); }
-.serpiente .hoja { fill: var(--verde); }
+.serpiente .hoja { fill: var(--menta); }
 .olas {
-  height: 9px; background: var(--verde);
+  height: 9px; background: var(--menta);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='9'%3E%3Cpath d='M-18 5.5q9 7 18 0t18 0t18 0t18 0' fill='none' stroke='%23000' stroke-width='2.2'/%3E%3C/svg%3E") repeat-x center;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='9'%3E%3Cpath d='M-18 5.5q9 7 18 0t18 0t18 0t18 0' fill='none' stroke='%23000' stroke-width='2.2'/%3E%3C/svg%3E") repeat-x center;
 }
@@ -157,7 +160,7 @@ a { color: inherit; }
 .estado { padding: 40px 0; text-align: center; color: var(--tenue); font: italic 1.05rem var(--display); }
 .titulo-bloque {
   font: italic 700 1.7rem/1.1 var(--display); font-variation-settings: "SOFT" 100;
-  letter-spacing: -0.02em; color: var(--violeta); margin: 26px 0 0;
+  letter-spacing: -0.02em; color: var(--rosa); margin: 26px 0 0;
 }
 .titulo-bloque small {
   display: block; margin-top: 5px; color: var(--tenue);
@@ -172,7 +175,7 @@ a { color: inherit; }
 }
 .nota h2 { font: 600 1.28rem/1.22 var(--display); margin: 7px 0 4px; letter-spacing: -0.012em; text-wrap: balance; }
 .nota h2 a { text-decoration: none; }
-.nota h2 a:hover { text-decoration: underline; text-decoration-color: var(--violeta); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.nota h2 a:hover { text-decoration: underline; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .resumen { margin: 0; color: var(--tenue); font-size: 0.93rem; }
 a.leida { color: var(--tenue); }
 
@@ -182,7 +185,7 @@ a.leida { color: var(--tenue); }
   display: flex; align-items: center; gap: 10px; min-height: 42px;
 }
 .cobertura summary::-webkit-details-marker { display: none; }
-.cobertura summary::after { content: "+"; margin-left: auto; color: var(--violeta); font: 600 1.1rem var(--sans); }
+.cobertura summary::after { content: "+"; margin-left: auto; color: var(--rosa); font: 600 1.1rem var(--sans); }
 .cobertura[open] summary::after { content: "−"; }
 .cobertura .barra { width: 64px; margin: 0; flex: none; }
 .cobertura ul { list-style: none; margin: 0; padding: 0 14px 6px; }
@@ -203,7 +206,7 @@ a.leida { color: var(--tenue); }
 /* Pie */
 .pie { margin-top: 36px; padding: 0 0 48px; font-size: 0.88rem; }
 .pie::before {
-  content: ""; display: block; height: 9px; margin-bottom: 24px; background: var(--verde);
+  content: ""; display: block; height: 9px; margin-bottom: 24px; background: var(--menta);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='9'%3E%3Cpath d='M-18 5.5q9 7 18 0t18 0t18 0t18 0' fill='none' stroke='%23000' stroke-width='2.2'/%3E%3C/svg%3E") repeat-x center;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='9'%3E%3Cpath d='M-18 5.5q9 7 18 0t18 0t18 0t18 0' fill='none' stroke='%23000' stroke-width='2.2'/%3E%3C/svg%3E") repeat-x center;
 }
@@ -219,4 +222,4 @@ a.leida { color: var(--tenue); }
 .epigrafes { margin-top: 28px; text-align: center; }
 .epigrafes p { margin: 0 0 12px; font: italic 500 1.02rem/1.35 var(--display); text-wrap: balance; }
 .epigrafes span { display: block; margin-top: 2px; font: 500 0.7rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--tenue); }
-.epigrafes .sello { margin-top: 20px; font: 500 0.72rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--verde); }
+.epigrafes .sello { margin-top: 20px; font: 500 0.72rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--menta-texto); }
