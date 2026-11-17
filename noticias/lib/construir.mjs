@@ -2,7 +2,7 @@
 
 import { createHash } from 'node:crypto';
 import { parsearFeed } from './rss.mjs';
-import { SECCIONES, clasificar, normalizar } from './texto.mjs';
+import { SECCIONES, clasificar, esRuido, normalizar } from './texto.mjs';
 import { agruparTemas } from './temas.mjs';
 
 const TODAS = SECCIONES.map((s) => s.id);
@@ -57,6 +57,7 @@ export async function construir({ config, descargar, ahora = new Date(), registr
       }
       const ms = item.fecha.getTime();
       if (ms < desde || ms > hasta) continue;
+      if (esRuido(item.titulo)) continue;
       const seccion = seccionDe(item, feed);
       if (!seccion) continue;
       salida.push({ ...item, url: urlCanonica(item.url), seccion, fuente: fuente.id, idioma: fuente.idioma });

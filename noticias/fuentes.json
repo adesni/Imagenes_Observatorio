@@ -60,11 +60,11 @@
       ] },
     { "id": "bloomberglinea", "nombre": "Bloomberg Línea", "orientacion": "centro", "idioma": "es", "sitio": "bloomberglinea.com",
       "feeds": [
-        {"url": "https://www.bloomberglinea.com/arc/outboundfeeds/rss/?outputType=xml", "seccion": "mixto"}
+        {"url": "https://www.bloomberglinea.com/arc/outboundfeeds/rss/?outputType=xml", "seccion": "mixto", "secciones": ["mercados", "macro", "mexico", "mundo"]}
       ] },
     { "id": "investing", "nombre": "Investing.com", "orientacion": "centro", "idioma": "es", "sitio": "es.investing.com",
       "feeds": [
-        {"url": "https://es.investing.com/rss/news.rss", "seccion": "finanzas"}
+        {"url": "https://es.investing.com/rss/news.rss", "seccion": "mixto", "secciones": ["mercados", "macro"]}
       ] },
     { "id": "ft", "nombre": "Financial Times", "orientacion": "centro", "idioma": "en", "sitio": "ft.com",
       "feeds": [
@@ -91,7 +91,7 @@
         {"url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/category/economia/?outputType=xml", "seccion": "macro"},
         {"url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/category/mercados/?outputType=xml", "seccion": "mercados"}
       ] },
-    { "id": "economista", "nombre": "El Economista", "orientacion": "centro-derecha", "idioma": "es", "sitio": "eleconomista.com.mx", "feeds": [] },
+    { "id": "economista", "nombre": "El Economista", "orientacion": "centro-derecha", "idioma": "es", "sitio": "eleconomista.com.mx", "secciones": ["mercados", "macro", "mexico", "mundo"], "feeds": [] },
     { "id": "reforma", "nombre": "Reforma", "orientacion": "centro-derecha", "idioma": "es", "sitio": "reforma.com",
       "feeds": [
         {"url": "https://www.reforma.com/rss/portada.xml", "seccion": "mixto"}

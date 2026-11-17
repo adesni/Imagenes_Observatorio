@@ -33,6 +33,15 @@ export function tokens(titulo) {
   return salida;
 }
 
+// Notas de servicio y de relleno que no son información política ni económica.
+const RUIDO_EXACTO = /\b(HOY|EN VIVO|EN DIRECTO|MINUTO A MINUTO)\b/;
+const RUIDO = /\b(hoy no circula|no circulan|horoscopos?|pronostico del clima|clima (hoy|para)|sismos? registrados|temblor (hoy|en)|quiniela|loteria|melate|donde ver|a que hora (juega|es|inicia)|resultados del sorteo|santoral|efemerides)\b/;
+
+/** true si el titular es una nota de servicio (tráfico, sismos, lotería, "HOY", "EN VIVO"…). */
+export function esRuido(titulo) {
+  return RUIDO_EXACTO.test(titulo) || RUIDO.test(normalizar(titulo));
+}
+
 const b = (lista) => new RegExp(`\\b(?:${lista})\\b`, 'g');
 
 const PATRONES = {

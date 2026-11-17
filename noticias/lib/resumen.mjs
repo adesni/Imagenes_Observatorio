@@ -27,46 +27,64 @@ export function armarResumen(datos, { urlSitio = '', ahora = new Date(), maxCara
     weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Mexico_City',
   }).format(ahora);
 
-  const bloques = [`*Leviatana* 🐉 ${fechaTxt}`];
-  if (datos.mercados?.length) bloques.push(`*Mercados*\n${lineaMercados(datos.mercados)}`);
+  // Cada bloque es un encabezado más sus renglones; así se puede repartir sin cortar un titular ni un enlace.
+  const bloques = [{ cabeza: `*Leviatana* 🐉 ${fechaTxt}`, items: [] }];
+  if (datos.mercados?.length) bloques.push({ cabeza: '*Mercados hoy*', items: [lineaMercados(datos.mercados)] });
 
   const usados = new Set();
   const destacados = datos.temas.filter((t) => t.fuentes >= 3 && porId.has(t.principal)).slice(0, 5);
   if (destacados.length) {
-    const lineas = destacados.map((t, i) => {
-      const n = porId.get(t.principal);
-      usados.add(t.id);
-      return `${i + 1}. ${n.t}\n_${medio(n)} y ${t.fuentes - 1} medios más_\n${n.u}`;
+    bloques.push({
+      cabeza: '*Lo más cubierto*',
+      items: destacados.map((t, i) => {
+        const n = porId.get(t.principal);
+        usados.add(t.id);
+        return `${i + 1}. ${n.t}\n_${medio(n)} y ${t.fuentes - 1} medios más_\n${n.u}`;
+      }),
     });
-    bloques.push(`*Lo más cubierto*\n${lineas.join('\n')}`);
   }
 
+  const enEspanol = (n) => datos.fuentes[n.f]?.idioma === 'es';
   for (const s of datos.secciones) {
-    const lineas = [];
-    for (const n of datos.noticias) {
-      if (lineas.length >= porSeccion) break;
-      if (n.s !== s.id || datos.fuentes[n.f]?.idioma !== 'es') continue;
-      if (n.g) {
-        if (usados.has(n.g)) continue;
-        usados.add(n.g);
-      }
-      lineas.push(`• ${n.t} _(${medio(n)})_`);
+    const items = [];
+    // Primero lo que cubrieron varios medios en esta sección; después, lo más reciente.
+    for (const t of datos.temas) {
+      if (items.length >= porSeccion) break;
+      const n = porId.get(t.principal);
+      if (t.s !== s.id || usados.has(t.id) || !n || !enEspanol(n)) continue;
+      usados.add(t.id);
+      items.push(`• ${n.t} _(${medio(n)} y ${t.fuentes - 1} más)_`);
     }
-    if (lineas.length) bloques.push(`*${s.nombre}*\n${lineas.join('\n')}`);
+    for (const n of datos.noticias) {
+      if (items.length >= porSeccion) break;
+      if (n.s !== s.id || n.g || !enEspanol(n)) continue;
+      items.push(`• ${n.t} _(${medio(n)})_`);
+    }
+    if (items.length) bloques.push({ cabeza: `*${s.nombre}*`, items });
   }
-  if (urlSitio) bloques.push(`Tu feed propio, con todos los lados:\n${urlSitio}`);
+  if (urlSitio) bloques.push({ cabeza: 'Tu feed propio, con todos los lados:', items: [urlSitio] });
 
-  // Reparte los bloques en mensajes sin partir ninguno a la mitad.
+  // Reparte en mensajes: un bloque completo si cabe; si no, se parte entre renglones, nunca a media línea.
   const mensajes = [];
   let actual = '';
+  const cerrar = () => {
+    if (actual) mensajes.push(actual);
+    actual = '';
+  };
   for (const b of bloques) {
-    const bloque = b.length > maxCaracteres ? `${b.slice(0, maxCaracteres - 1)}…` : b;
-    if (actual && actual.length + 2 + bloque.length > maxCaracteres) {
-      mensajes.push(actual);
-      actual = '';
+    const entero = [b.cabeza, ...b.items].join('\n');
+    if (actual && actual.length + 2 + entero.length > maxCaracteres) cerrar();
+    if (entero.length <= maxCaracteres) {
+      actual = actual ? `${actual}\n\n${entero}` : entero;
+      continue;
     }
-    actual = actual ? `${actual}\n\n${bloque}` : bloque;
+    actual = b.cabeza;
+    for (const item of b.items) {
+      const renglon = item.length > maxCaracteres - b.cabeza.length - 1 ? item.split('\n')[0].slice(0, maxCaracteres - b.cabeza.length - 2) : item;
+      if (actual.length + 1 + renglon.length > maxCaracteres) cerrar();
+      actual = actual ? `${actual}\n${renglon}` : renglon;
+    }
   }
-  if (actual) mensajes.push(actual);
+  cerrar();
   return mensajes;
 }

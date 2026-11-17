@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { parsearFeed, textoPlano, decodificarCuerpo } from '../lib/rss.mjs';
-import { tokens, clasificar } from '../lib/texto.mjs';
+import { tokens, clasificar, esRuido } from '../lib/texto.mjs';
 import { construir } from '../lib/construir.mjs';
 import { leerCotizacion } from '../lib/mercados.mjs';
 import { armarResumen } from '../lib/resumen.mjs';
@@ -134,4 +134,25 @@ test('Google News: quita el nombre del medio aunque venga repetido en el titular
   const [a, b] = parsearFeed(xml);
   assert.equal(a.titulo, 'La CE celebra el acuerdo con Ruanda');
   assert.equal(b.titulo, 'Peso - dólar: cierre del día');
+});
+
+test('esRuido: descarta notas de servicio y deja pasar noticias', () => {
+  assert.ok(esRuido('¿Qué autos NO circulan HOY 17 de noviembre en CdMx y Edomex?'));
+  assert.ok(esRuido('Temblor en México EN VIVO: resumen de sismos registrados por el SSN'));
+  assert.ok(!esRuido('El Senado discute hoy la reforma judicial'));
+  assert.ok(!esRuido('Banxico recorta la tasa de interés a 7.25%'));
+});
+
+test('armarResumen: nunca corta un enlace y prioriza lo que cubren varios medios', async () => {
+  const datos = await construir({ config: configDemo, descargar: descargarDemo, ahora: AHORA });
+  for (const n of datos.noticias) n.u = `https://news.google.com/rss/articles/${'x'.repeat(260)}${n.id}`;
+  const mensajes = armarResumen(datos, { ahora: AHORA, maxCaracteres: 900 });
+  const todo = mensajes.join('\n');
+  for (const m of mensajes) assert.ok(m.length <= 900, `mensaje de ${m.length} caracteres`);
+  const enlaces = todo.match(/https:\/\/\S+/g) ?? [];
+  assert.equal(enlaces.length, 5);
+  for (const e of enlaces) assert.ok(datos.noticias.some((n) => n.u === e), 'enlace completo');
+  assert.ok(!todo.includes('…'));
+  // En la demo, el G20 lo cubren dos medios: debe aparecer en Internacional marcado como compartido.
+  assert.match(todo, /\*Internacional\*\n• .*G20.* y 1 más\)_/);
 });
