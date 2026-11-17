@@ -24,17 +24,17 @@ async function pedir(url) {
   return r;
 }
 const pausa = (ms) => new Promise((r) => setTimeout(r, ms));
-// Google News limita las ráfagas: sus consultas van de una en una, con un reintento si responde 429.
+// Google News limita las ráfagas: sus consultas van de una en una y espaciadas, con dos reintentos si responde 429.
 let filaGoogle = Promise.resolve();
 function pedirEnFila(url) {
   const turno = filaGoogle.then(async () => {
-    await pausa(400);
-    try {
-      return await pedir(url);
-    } catch (e) {
-      if (e.message !== 'HTTP 429') throw e;
-      await pausa(5000);
-      return pedir(url);
+    for (let intento = 0; ; intento++) {
+      await pausa(intento === 0 ? 1500 : 15_000);
+      try {
+        return await pedir(url);
+      } catch (e) {
+        if (e.message !== 'HTTP 429' || intento === 2) throw e;
+      }
     }
   });
   filaGoogle = turno.catch(() => {});
