@@ -27,7 +27,7 @@ export function armarResumen(datos, { urlSitio = '', ahora = new Date(), maxCara
     weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Mexico_City',
   }).format(ahora);
 
-  const bloques = [`*Leviatana* 🐉 ${fechaTxt}\nBestie, pasó esto:`];
+  const bloques = [`*Leviatana* 🐉 ${fechaTxt}`];
   if (datos.mercados?.length) bloques.push(`*Mercados*\n${lineaMercados(datos.mercados)}`);
 
   const usados = new Set();
