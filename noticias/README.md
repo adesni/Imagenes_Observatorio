@@ -45,12 +45,17 @@ La orientación es **una aproximación de la línea editorial**, no un veredicto
 
 En cada ejecución, el registro de *Actions* muestra qué medios respondieron (`✓` directo, `↺` respaldo, `✗` sin datos) y los temas más cubiertos.
 
+## De dónde sale cada cosa
+
+La página no redacta ni inventa nada. Cada titular, resumen, fecha y enlace se copia tal cual del RSS del medio (el resumen solo se recorta a 220 caracteres) y siempre enlaza a la nota original. Lo único que añade la app son la sección, la etiqueta de orientación del medio y la agrupación de titulares sobre un mismo hecho. Si responden menos de 5 medios, no se publica nada y se conserva la última versión.
+
+Los titulares de `pruebas/demo-datos.mjs` son inventados y solo los usan las pruebas automáticas; nunca se copian al sitio.
+
 ## Para desarrollo
 
 ```bash
 node --test noticias/pruebas/*.test.mjs      # pruebas
 node noticias/scripts/actualizar.mjs         # descarga noticias reales a noticias/web/datos/
-node noticias/pruebas/vista-previa.mjs       # o genera datos de EJEMPLO, sin conexión
 python3 -m http.server -d noticias/web 8000  # abre http://localhost:8000
 node noticias/scripts/whatsapp.mjs --ver     # imprime el resumen sin enviarlo
 ```

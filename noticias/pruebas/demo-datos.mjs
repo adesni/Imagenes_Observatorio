@@ -1,4 +1,5 @@
-// Feeds inventados para las pruebas y para la vista previa local. Los titulares son de ejemplo, no noticias reales.
+// Feeds inventados SOLO para las pruebas automáticas. No son noticias reales y nunca se copian al sitio:
+// la página se arma únicamente con lo que scripts/actualizar.mjs descarga de los medios.
 
 export const AHORA = new Date('2026-11-17T13:00:00Z');
 
