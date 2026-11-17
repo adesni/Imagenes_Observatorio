@@ -1,4 +1,4 @@
-// Ni Dios Ni Banxico: lee datos/noticias.json y pinta la página. Sin dependencias.
+// Leviatana: lee datos/noticias.json y pinta la página. Sin dependencias.
 
 const ORIENTACION = {
   izquierda: { nombre: 'Izquierda', lado: 'izquierda', orden: 0 },
@@ -16,7 +16,7 @@ const LADOS = [
   { id: 'derecha', nombre: 'Derecha' },
 ];
 const PAGINA = 40;
-const CLAVE_LECTURAS = 'ndnb.lecturas';
+const CLAVE_LECTURAS = 'leviatana.lecturas';
 const SIETE_DIAS = 7 * 24 * 3600 * 1000;
 
 const $ = (id) => document.getElementById(id);
@@ -128,6 +128,9 @@ function tarjeta(entrada, yaLeidas, abierta) {
   return art;
 }
 
+const tituloBloque = (titulo, bajada) =>
+  el('h2', { class: 'titulo-bloque' }, titulo, el('small', { text: bajada }));
+
 /* ---------- Selección de notas ---------- */
 function pasaFiltros(n) {
   if (estado.lado !== 'todos' && orientDe(n).lado !== estado.lado) return false;
@@ -183,9 +186,9 @@ function pintarLista() {
   const nodos = [];
 
   if (sel.destacadas?.length) {
-    nodos.push(el('h2', { class: 'titulo-bloque', text: 'El chisme del día (lo más cubierto)' }));
+    nodos.push(tituloBloque('Todos contra todos', 'el mismo hecho, contado por cada lado'));
     for (const e of sel.destacadas) nodos.push(tarjeta(e, yaLeidas, true));
-    if (visibles.length) nodos.push(el('h2', { class: 'titulo-bloque', text: 'Recién salido' }));
+    if (visibles.length) nodos.push(tituloBloque('Estado de naturaleza', 'lo más reciente, tal como va saliendo'));
   }
   for (const e of visibles) nodos.push(tarjeta(e, yaLeidas, false));
   lista.replaceChildren(...nodos);

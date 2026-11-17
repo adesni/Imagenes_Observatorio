@@ -1,11 +1,11 @@
 {
-  "name": "Ni Dios Ni Banxico",
-  "short_name": "NDNB",
-  "description": "Bestie, pasó esto. Política y finanzas con todos los lados a la vista.",
+  "name": "Leviatana",
+  "short_name": "Leviatana",
+  "description": "Un feed propio: política y finanzas con todos los lados a la vista.",
   "lang": "es-MX",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#f6f3ec",
-  "theme_color": "#f6f3ec",
+  "background_color": "#f8f3ea",
+  "theme_color": "#f8f3ea",
   "icons": [{ "src": "icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }
