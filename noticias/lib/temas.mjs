@@ -12,7 +12,7 @@ const LADO = {
 };
 export const ladoDe = (orientacion) => LADO[orientacion] ?? 'centro';
 
-// Para el titular principal de un tema se prefiere la fuente más neutral disponible.
+// Orden de desempate al elegir el titular principal de un tema.
 const NEUTRALIDAD = ['agencia', 'centro', 'oficial', 'centro-izquierda', 'centro-derecha', 'izquierda', 'derecha'];
 
 // Devuelve el peso de las palabras en común si bastan para considerar que es el mismo hecho; si no, 0.
@@ -78,10 +78,18 @@ export function agruparTemas(noticias, fuentes) {
     const medios = new Set(g.map((it) => it.n.fuente));
     if (medios.size < 2) continue;
     const lados = new Set([...medios].map((f) => ladoDe(fuentes[f]?.orientacion)));
-    const principal = [...g].sort((a, b) => {
+    // Titular principal: entre las fuentes de centro o agencia (si las hay), el que más se parece al resto.
+    const neutrales = g.filter((it) => ladoDe(fuentes[it.n.fuente]?.orientacion) === 'centro');
+    const candidatos = neutrales.length ? neutrales : g;
+    const afinidad = new Map(candidatos.map((c) => {
+      let suma = 0;
+      for (const m of g) if (m !== c) for (const t of c.tok) if (m.tok.has(t)) suma += peso(t);
+      return [c, suma];
+    }));
+    const principal = [...candidatos].sort((a, b) => {
       const na = NEUTRALIDAD.indexOf(fuentes[a.n.fuente]?.orientacion);
       const nb = NEUTRALIDAD.indexOf(fuentes[b.n.fuente]?.orientacion);
-      return na - nb || b.ms - a.ms;
+      return afinidad.get(b) - afinidad.get(a) || na - nb || b.ms - a.ms;
     })[0];
     const conteo = {};
     for (const it of g) conteo[it.n.seccion] = (conteo[it.n.seccion] ?? 0) + 1;

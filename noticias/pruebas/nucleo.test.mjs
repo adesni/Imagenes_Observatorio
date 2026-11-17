@@ -118,3 +118,20 @@ test('armarResumen: mensajes dentro del límite y con enlace al sitio', async ()
   assert.match(todo, /Lo más cubierto/);
   assert.match(todo, /https:\/\/ejemplo\.github\.io\/sitio\//);
 });
+
+test('Google News: quita el nombre del medio aunque venga repetido en el titular', () => {
+  const xml = `<rss><channel><item>
+    <title>La CE celebra el acuerdo con Ruanda - EFE - EFE Noticias</title>
+    <link>https://news.google.com/rss/articles/xyz</link>
+    <pubDate>Mon, 16 Nov 2026 18:00:00 GMT</pubDate>
+    <source url="https://efe.com">EFE Noticias</source>
+  </item><item>
+    <title>Peso - dólar: cierre del día - El Financiero</title>
+    <link>https://news.google.com/rss/articles/abc</link>
+    <pubDate>Mon, 16 Nov 2026 18:00:00 GMT</pubDate>
+    <source url="https://elfinanciero.com.mx">El Financiero</source>
+  </item></channel></rss>`;
+  const [a, b] = parsearFeed(xml);
+  assert.equal(a.titulo, 'La CE celebra el acuerdo con Ruanda');
+  assert.equal(b.titulo, 'Peso - dólar: cierre del día');
+});

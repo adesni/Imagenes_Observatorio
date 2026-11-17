@@ -2,7 +2,7 @@
 
 Página de noticias de **política nacional (México), internacional, mercados y macroeconomía**, con la orientación editorial de cada medio a la vista, y un **resumen diario por WhatsApp**.
 
-- Lee los feeds RSS de 34 medios de todo el espectro (lista en [`fuentes.json`](fuentes.json)).
+- Lee los titulares de 34 medios de todo el espectro, por su RSS o, cuando no lo ofrecen, por Google News (lista en [`fuentes.json`](fuentes.json)).
 - Junta los titulares que hablan del mismo hecho para que compares cómo lo cuenta cada lado ("Así lo cuentan 8 medios").
 - "Lo más cubierto" son los hechos que reportan 3 o más medios; el titular principal sale siempre de la fuente más neutral disponible (agencia o centro).
 - Filtros por orientación, buscador, indicadores de mercado y un "balance de lectura" que te muestra de qué lado has leído más (se guarda solo en tu dispositivo).

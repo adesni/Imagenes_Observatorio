@@ -23,8 +23,25 @@ async function pedir(url) {
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return r;
 }
+const pausa = (ms) => new Promise((r) => setTimeout(r, ms));
+// Google News limita las ráfagas: sus consultas van de una en una, con un reintento si responde 429.
+let filaGoogle = Promise.resolve();
+function pedirEnFila(url) {
+  const turno = filaGoogle.then(async () => {
+    await pausa(400);
+    try {
+      return await pedir(url);
+    } catch (e) {
+      if (e.message !== 'HTTP 429') throw e;
+      await pausa(5000);
+      return pedir(url);
+    }
+  });
+  filaGoogle = turno.catch(() => {});
+  return turno;
+}
 const descargar = async (url) => {
-  const r = await pedir(url);
+  const r = await (url.startsWith('https://news.google.com/') ? pedirEnFila(url) : pedir(url));
   return decodificarCuerpo(await r.arrayBuffer(), r.headers.get('content-type') ?? '');
 };
 const descargarJson = async (url) => (await pedir(url)).json();

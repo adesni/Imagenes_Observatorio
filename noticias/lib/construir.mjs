@@ -84,6 +84,7 @@ export async function construir({ config, descargar, ahora = new Date(), registr
         const r = await leerFeed(fuente, { url: urlRespaldo(fuente), seccion: 'mixto', secciones: fuente.secciones });
         notas.push(...r.items);
         estado = 'respaldo';
+        if (r.items.length === 0) errores.push(`respaldo Google News → ${r.total} entradas, ninguna reciente de política o economía`);
       } catch (e) {
         errores.push(`respaldo Google News → ${e.message}`);
       }

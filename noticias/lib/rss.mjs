@@ -94,8 +94,13 @@ export function parsearFeed(xml) {
     let resumen = textoPlano(etiqueta(bloque, ['description', 'summary', 'content:encoded', 'content']));
     if (/^https?:\/\/news\.google\.com\//i.test(url)) {
       // Google News: "Titular - Medio" y una descripción que solo repite el titular.
+      const medio = textoPlano(etiqueta(bloque, ['source'])).toLowerCase();
       const i = titulo.lastIndexOf(' - ');
       if (i > 0) titulo = titulo.slice(0, i).trim();
+      // Algunos medios ya incluyen su nombre en el titular ("… - EFE - EFE").
+      const j = titulo.lastIndexOf(' - ');
+      const cola = j > 0 ? titulo.slice(j + 3).trim().toLowerCase() : '';
+      if (cola && medio && (medio.includes(cola) || cola.includes(medio))) titulo = titulo.slice(0, j).trim();
       resumen = '';
     }
     if (resumen.toLowerCase().startsWith(titulo.toLowerCase())) resumen = '';
