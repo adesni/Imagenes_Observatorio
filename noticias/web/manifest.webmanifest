@@ -1,0 +1,11 @@
+{
+  "name": "Contrapeso",
+  "short_name": "Contrapeso",
+  "description": "Política y finanzas, con el espectro completo a la vista",
+  "lang": "es-MX",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#f6f3ec",
+  "icons": [{ "src": "icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

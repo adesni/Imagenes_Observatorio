@@ -1,0 +1,123 @@
+{
+  "ventana_horas": 48,
+  "max_por_feed": 25,
+  "nota": "La orientación es una aproximación de la línea editorial de cada medio, no un veredicto. Valores válidos: izquierda, centro-izquierda, centro, centro-derecha, derecha, agencia, oficial. Si un feed directo falla, se usa Google News (site:<sitio>) como respaldo.",
+  "fuentes": [
+    { "id": "jornada", "nombre": "La Jornada", "orientacion": "izquierda", "idioma": "es", "sitio": "jornada.com.mx",
+      "feeds": [
+        { "url": "https://www.jornada.com.mx/rss/politica.xml", "seccion": "mexico" },
+        { "url": "https://www.jornada.com.mx/rss/mundo.xml", "seccion": "mundo" },
+        { "url": "https://www.jornada.com.mx/rss/economia.xml", "seccion": "finanzas" }
+      ] },
+    { "id": "sinembargo", "nombre": "Sin Embargo", "orientacion": "izquierda", "idioma": "es", "sitio": "sinembargo.mx",
+      "feeds": [ { "url": "https://www.sinembargo.mx/feed", "seccion": "mixto" } ] },
+    { "id": "jacobinlat", "nombre": "Jacobin América Latina", "orientacion": "izquierda", "idioma": "es", "sitio": "jacobinlat.com",
+      "feeds": [ { "url": "https://jacobinlat.com/feed/", "seccion": "mixto" } ] },
+    { "id": "pagina12", "nombre": "Página/12", "orientacion": "izquierda", "idioma": "es", "sitio": "pagina12.com.ar",
+      "feeds": [ { "url": "https://www.pagina12.com.ar/rss/secciones/el-mundo/notas", "seccion": "mundo" } ] },
+    { "id": "celag", "nombre": "CELAG", "orientacion": "izquierda", "idioma": "es", "sitio": "celag.org",
+      "feeds": [ { "url": "https://www.celag.org/feed/", "seccion": "mixto", "secciones": ["macro", "mundo"] } ] },
+
+    { "id": "proceso", "nombre": "Proceso", "orientacion": "centro-izquierda", "idioma": "es", "sitio": "proceso.com.mx",
+      "feeds": [ { "url": "https://www.proceso.com.mx/rss/", "seccion": "mixto" } ] },
+    { "id": "animal", "nombre": "Animal Político", "orientacion": "centro-izquierda", "idioma": "es", "sitio": "animalpolitico.com",
+      "feeds": [ { "url": "https://animalpolitico.com/feed", "seccion": "mixto" } ] },
+    { "id": "aristegui", "nombre": "Aristegui Noticias", "orientacion": "centro-izquierda", "idioma": "es", "sitio": "aristeguinoticias.com",
+      "feeds": [ { "url": "https://aristeguinoticias.com/feed/", "seccion": "mixto" } ] },
+    { "id": "elpais", "nombre": "El País", "orientacion": "centro-izquierda", "idioma": "es", "sitio": "elpais.com",
+      "feeds": [
+        { "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/mexico/portada", "seccion": "mexico" },
+        { "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada", "seccion": "mundo" },
+        { "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/economia/portada", "seccion": "finanzas" }
+      ] },
+    { "id": "guardian", "nombre": "The Guardian", "orientacion": "centro-izquierda", "idioma": "en", "sitio": "theguardian.com",
+      "feeds": [
+        { "url": "https://www.theguardian.com/world/rss", "seccion": "mundo" },
+        { "url": "https://www.theguardian.com/business/economics/rss", "seccion": "finanzas" }
+      ] },
+
+    { "id": "universal", "nombre": "El Universal", "orientacion": "centro", "idioma": "es", "sitio": "eluniversal.com.mx",
+      "feeds": [
+        { "url": "https://www.eluniversal.com.mx/arc/outboundfeeds/rss/category/nacion/?outputType=xml", "seccion": "mexico" },
+        { "url": "https://www.eluniversal.com.mx/arc/outboundfeeds/rss/category/mundo/?outputType=xml", "seccion": "mundo" },
+        { "url": "https://www.eluniversal.com.mx/arc/outboundfeeds/rss/category/cartera/?outputType=xml", "seccion": "finanzas" }
+      ] },
+    { "id": "milenio", "nombre": "Milenio", "orientacion": "centro", "idioma": "es", "sitio": "milenio.com",
+      "feeds": [ { "url": "https://www.milenio.com/rss", "seccion": "mixto" } ] },
+    { "id": "expansion", "nombre": "Expansión", "orientacion": "centro", "idioma": "es", "sitio": "expansion.mx",
+      "feeds": [
+        { "url": "https://politica.expansion.mx/rss", "seccion": "mexico" },
+        { "url": "https://expansion.mx/rss/economia", "seccion": "finanzas" }
+      ] },
+    { "id": "bbc", "nombre": "BBC Mundo", "orientacion": "centro", "idioma": "es", "sitio": "bbc.com/mundo",
+      "feeds": [
+        { "url": "https://feeds.bbci.co.uk/mundo/temas/internacional/rss.xml", "seccion": "mundo" },
+        { "url": "https://feeds.bbci.co.uk/mundo/temas/economia/rss.xml", "seccion": "finanzas" }
+      ] },
+    { "id": "dw", "nombre": "DW Español", "orientacion": "centro", "idioma": "es", "sitio": "dw.com/es",
+      "feeds": [ { "url": "https://rss.dw.com/xml/rss-sp-all", "seccion": "mixto" } ] },
+    { "id": "france24", "nombre": "France 24", "orientacion": "centro", "idioma": "es", "sitio": "france24.com/es",
+      "feeds": [ { "url": "https://www.france24.com/es/rss", "seccion": "mixto" } ] },
+    { "id": "bloomberglinea", "nombre": "Bloomberg Línea", "orientacion": "centro", "idioma": "es", "sitio": "bloomberglinea.com",
+      "feeds": [ { "url": "https://www.bloomberglinea.com/arc/outboundfeeds/rss/?outputType=xml", "seccion": "mixto" } ] },
+    { "id": "investing", "nombre": "Investing.com", "orientacion": "centro", "idioma": "es", "sitio": "es.investing.com",
+      "feeds": [ { "url": "https://es.investing.com/rss/news.rss", "seccion": "finanzas" } ] },
+    { "id": "ft", "nombre": "Financial Times", "orientacion": "centro", "idioma": "en", "sitio": "ft.com",
+      "feeds": [
+        { "url": "https://www.ft.com/markets?format=rss", "seccion": "mercados" },
+        { "url": "https://www.ft.com/global-economy?format=rss", "seccion": "macro" }
+      ] },
+    { "id": "cnbc", "nombre": "CNBC", "orientacion": "centro", "idioma": "en", "sitio": "cnbc.com",
+      "feeds": [
+        { "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html", "seccion": "macro" },
+        { "url": "https://www.cnbc.com/id/10000664/device/rss/rss.html", "seccion": "finanzas" }
+      ] },
+
+    { "id": "efe", "nombre": "Agencia EFE", "orientacion": "agencia", "idioma": "es", "sitio": "efe.com",
+      "feeds": [
+        { "url": "https://efe.com/mundo/feed/", "seccion": "mundo" },
+        { "url": "https://efe.com/economia/feed/", "seccion": "finanzas" }
+      ] },
+    { "id": "reuters", "nombre": "Reuters", "orientacion": "agencia", "idioma": "en", "sitio": "reuters.com", "feeds": [] },
+    { "id": "ap", "nombre": "Associated Press", "orientacion": "agencia", "idioma": "en", "sitio": "apnews.com", "feeds": [] },
+    { "id": "fed", "nombre": "Reserva Federal (EE. UU.)", "orientacion": "oficial", "idioma": "en", "sitio": "federalreserve.gov",
+      "feeds": [ { "url": "https://www.federalreserve.gov/feeds/press_monetary.xml", "seccion": "macro" } ] },
+
+    { "id": "excelsior", "nombre": "Excélsior", "orientacion": "centro-derecha", "idioma": "es", "sitio": "excelsior.com.mx",
+      "feeds": [ { "url": "https://www.excelsior.com.mx/rss.xml", "seccion": "mixto" } ] },
+    { "id": "financiero", "nombre": "El Financiero", "orientacion": "centro-derecha", "idioma": "es", "sitio": "elfinanciero.com.mx",
+      "feeds": [
+        { "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/category/nacional/?outputType=xml", "seccion": "mexico" },
+        { "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/category/mundo/?outputType=xml", "seccion": "mundo" },
+        { "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/category/economia/?outputType=xml", "seccion": "macro" },
+        { "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/category/mercados/?outputType=xml", "seccion": "mercados" }
+      ] },
+    { "id": "economista", "nombre": "El Economista", "orientacion": "centro-derecha", "idioma": "es", "sitio": "eleconomista.com.mx",
+      "feeds": [
+        { "url": "https://www.eleconomista.com.mx/rss/mercados", "seccion": "mercados" },
+        { "url": "https://www.eleconomista.com.mx/rss/economia", "seccion": "macro" },
+        { "url": "https://www.eleconomista.com.mx/rss/politica", "seccion": "mexico" }
+      ] },
+    { "id": "reforma", "nombre": "Reforma", "orientacion": "centro-derecha", "idioma": "es", "sitio": "reforma.com",
+      "feeds": [ { "url": "https://www.reforma.com/rss/portada.xml", "seccion": "mixto" } ] },
+    { "id": "heraldo", "nombre": "El Heraldo de México", "orientacion": "centro-derecha", "idioma": "es", "sitio": "heraldodemexico.com.mx",
+      "feeds": [ { "url": "https://heraldodemexico.com.mx/rss/feed.html?r=4", "seccion": "mixto" } ] },
+    { "id": "infobae", "nombre": "Infobae", "orientacion": "centro-derecha", "idioma": "es", "sitio": "infobae.com/mexico", "feeds": [] },
+    { "id": "economist", "nombre": "The Economist", "orientacion": "centro-derecha", "idioma": "en", "sitio": "economist.com",
+      "feeds": [
+        { "url": "https://www.economist.com/international/rss.xml", "seccion": "mundo" },
+        { "url": "https://www.economist.com/the-americas/rss.xml", "seccion": "mundo" },
+        { "url": "https://www.economist.com/finance-and-economics/rss.xml", "seccion": "finanzas" }
+      ] },
+    { "id": "wsj", "nombre": "The Wall Street Journal", "orientacion": "centro-derecha", "idioma": "en", "sitio": "wsj.com",
+      "feeds": [
+        { "url": "https://feeds.a.dj.com/rss/RSSWorldNews.xml", "seccion": "mundo" },
+        { "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", "seccion": "finanzas" }
+      ] },
+
+    { "id": "razon", "nombre": "La Razón de México", "orientacion": "derecha", "idioma": "es", "sitio": "razon.com.mx",
+      "feeds": [ { "url": "https://www.razon.com.mx/arc/outboundfeeds/rss/?outputType=xml", "seccion": "mixto" } ] },
+    { "id": "abc", "nombre": "ABC (España)", "orientacion": "derecha", "idioma": "es", "sitio": "abc.es",
+      "feeds": [ { "url": "https://www.abc.es/rss/2.0/internacional/", "seccion": "mundo" } ] }
+  ]
+}

@@ -1,0 +1,74 @@
+name: Noticias (Contrapeso)
+
+on:
+  schedule:
+    - cron: '17 * * * *'   # actualiza la página cada hora
+    - cron: '7 13 * * *'   # 7:07 a. m. en Ciudad de México: además envía el resumen por WhatsApp
+  workflow_dispatch:
+    inputs:
+      whatsapp:
+        description: Enviar también el resumen por WhatsApp
+        type: boolean
+        default: false
+  push:
+    paths:
+      - 'noticias/**'
+      - '.github/workflows/noticias.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: noticias-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pruebas
+        run: node --test noticias/pruebas/*.test.mjs
+
+      - name: Descargar noticias
+        run: node noticias/scripts/actualizar.mjs
+
+      - name: Armar el sitio
+        run: |
+          mkdir _site
+          cp -r noticias/web/. _site/
+          # Conserva las imágenes del repositorio en la misma dirección por si ya se usaban desde GitHub Pages.
+          find . -maxdepth 1 -type f \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -exec cp {} _site/ \;
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Resumen por WhatsApp
+        if: github.event.schedule == '7 13 * * *' || inputs.whatsapp
+        env:
+          WHATSAPP_TELEFONO: ${{ secrets.WHATSAPP_TELEFONO }}
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+          URL_SITIO: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: node noticias/scripts/whatsapp.mjs
+
+  publicar:
+    needs: construir
+    # Solo la rama principal publica en GitHub Pages.
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contrapeso · Política y finanzas</title>
+  <meta name="description" content="Noticias de política mexicana, internacional, mercados y macroeconomía, con la orientación de cada medio a la vista.">
+  <meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15171a" media="(prefers-color-scheme: dark)">
+  <meta name="robots" content="noindex">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icono.svg">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="ancho">
+      <p class="fecha" id="fecha"></p>
+      <h1>Contrapeso</h1>
+      <p class="lema">Política y finanzas, con el espectro completo a la vista</p>
+    </div>
+  </header>
+
+  <div class="mercados" id="mercados" hidden>
+    <ul class="ancho" id="lista-mercados" aria-label="Indicadores de mercado"></ul>
+  </div>
+
+  <nav class="secciones" aria-label="Secciones">
+    <div class="ancho" id="pestanas" role="tablist"></div>
+  </nav>
+
+  <main class="ancho">
+    <section class="controles" aria-label="Filtros">
+      <div class="lados" id="lados" role="group" aria-label="Filtrar por orientación del medio"></div>
+      <input type="search" id="buscar" placeholder="Buscar en titulares…" aria-label="Buscar en titulares" autocomplete="off">
+    </section>
+
+    <section class="espectro" id="espectro" aria-live="polite" hidden></section>
+
+    <div id="estado" class="estado" role="status">Cargando noticias…</div>
+    <div id="lista"></div>
+    <button type="button" id="mas" class="mas" hidden>Ver más</button>
+  </main>
+
+  <footer class="pie">
+    <div class="ancho">
+      <section id="balance" hidden>
+        <h2>Tu balance de lectura</h2>
+        <p class="nota-pie">Notas que abriste en los últimos 7 días, según la orientación del medio. Solo se guarda en este dispositivo.</p>
+        <div id="balance-barra"></div>
+      </section>
+
+      <details id="fuentes">
+        <summary>Fuentes y orientación editorial</summary>
+        <p class="nota-pie">
+          La etiqueta de cada medio es una aproximación de su línea editorial, no un veredicto sobre cada nota.
+          Sirve para que compares cómo se cuenta un mismo hecho desde distintos lugares.
+          Las agencias y las fuentes oficiales se cuentan como centro.
+        </p>
+        <ul id="lista-fuentes"></ul>
+      </details>
+
+      <p class="nota-pie" id="actualizado"></p>
+    </div>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
