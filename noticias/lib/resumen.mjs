@@ -27,7 +27,7 @@ export function armarResumen(datos, { urlSitio = '', ahora = new Date(), maxCara
     weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Mexico_City',
   }).format(ahora);
 
-  const bloques = [`*Contrapeso* · ${fechaTxt}`];
+  const bloques = [`*Ni Dios Ni Banxico* 🌱 ${fechaTxt}\nBestie, pasó esto:`];
   if (datos.mercados?.length) bloques.push(`*Mercados*\n${lineaMercados(datos.mercados)}`);
 
   const usados = new Set();
@@ -54,7 +54,7 @@ export function armarResumen(datos, { urlSitio = '', ahora = new Date(), maxCara
     }
     if (lineas.length) bloques.push(`*${s.nombre}*\n${lineas.join('\n')}`);
   }
-  if (urlSitio) bloques.push(`Todo, con el espectro completo:\n${urlSitio}`);
+  if (urlSitio) bloques.push(`El chisme completo, con todos los lados:\n${urlSitio}`);
 
   // Reparte los bloques en mensajes sin partir ninguno a la mitad.
   const mensajes = [];

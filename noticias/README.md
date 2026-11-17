@@ -1,10 +1,10 @@
-# Contrapeso
+# Ni Dios Ni Banxico
 
 Página de noticias de **política nacional (México), internacional, mercados y macroeconomía**, con la orientación editorial de cada medio a la vista, y un **resumen diario por WhatsApp**.
 
 - Lee los titulares de 34 medios de todo el espectro, por su RSS o, cuando no lo ofrecen, por Google News (lista en [`fuentes.json`](fuentes.json)).
 - Junta los titulares que hablan del mismo hecho para que compares cómo lo cuenta cada lado ("Así lo cuentan 8 medios").
-- "Lo más cubierto" son los hechos que reportan 3 o más medios; el titular principal sale siempre de la fuente más neutral disponible (agencia o centro).
+- "El chisme del día" son los hechos que reportan 3 o más medios; el titular principal sale siempre de la fuente más neutral disponible (agencia o centro).
 - Filtros por orientación, buscador, indicadores de mercado y un "balance de lectura" que te muestra de qué lado has leído más (se guarda solo en tu dispositivo).
 
 No usa servidores ni bases de datos: una tarea programada de GitHub Actions descarga las noticias cada hora y publica la página en GitHub Pages. Todo es gratuito.
@@ -13,7 +13,7 @@ No usa servidores ni bases de datos: una tarea programada de GitHub Actions desc
 
 1. **Lleva estos archivos a la rama principal (`main`).** Las tareas programadas de GitHub solo corren desde la rama principal.
 2. **Activa GitHub Pages:** en el repositorio, *Settings → Pages → Build and deployment → Source: **GitHub Actions***. (En el plan gratuito de GitHub el repositorio debe ser público.)
-3. **Primera ejecución:** pestaña *Actions → Noticias (Contrapeso) → Run workflow*. En un par de minutos la página queda en `https://<tu-usuario>.github.io/<repositorio>/`.
+3. **Primera ejecución:** pestaña *Actions → Noticias (Ni Dios Ni Banxico) → Run workflow*. En un par de minutos la página queda en `https://<tu-usuario>.github.io/<repositorio>/`.
 4. En el celular, abre la página y elige *Agregar a pantalla de inicio* para tenerla como app.
 
 A partir de ahí se actualiza sola cada hora.
@@ -26,7 +26,7 @@ El envío usa [CallMeBot](https://www.callmebot.com/blog/free-api-whatsapp-messa
 2. En GitHub: *Settings → Secrets and variables → Actions → New repository secret*, y crea dos secretos:
    - `WHATSAPP_TELEFONO`: tu número con código de país, por ejemplo `+5215512345678` (si no llega, prueba sin el `1`: `+525512345678`).
    - `CALLMEBOT_APIKEY`: la clave que te dio CallMeBot.
-3. Para probarlo: *Actions → Noticias (Contrapeso) → Run workflow* y marca **Enviar también el resumen por WhatsApp**.
+3. Para probarlo: *Actions → Noticias (Ni Dios Ni Banxico) → Run workflow* y marca **Enviar también el resumen por WhatsApp**.
 
 El resumen llega todos los días alrededor de las **7:07 a. m. (hora de Ciudad de México)**. Para cambiar la hora, edita la línea `cron: '7 13 * * *'` en [`.github/workflows/noticias.yml`](../.github/workflows/noticias.yml) (está en hora UTC: 13:07 UTC = 7:07 CDMX) y la misma cadena en la condición del paso *Resumen por WhatsApp*.
 

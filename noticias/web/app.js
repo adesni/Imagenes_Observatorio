@@ -1,4 +1,4 @@
-// Contrapeso: lee datos/noticias.json y pinta la página. Sin dependencias.
+// Ni Dios Ni Banxico: lee datos/noticias.json y pinta la página. Sin dependencias.
 
 const ORIENTACION = {
   izquierda: { nombre: 'Izquierda', lado: 'izquierda', orden: 0 },
@@ -16,7 +16,7 @@ const LADOS = [
   { id: 'derecha', nombre: 'Derecha' },
 ];
 const PAGINA = 40;
-const CLAVE_LECTURAS = 'contrapeso.lecturas';
+const CLAVE_LECTURAS = 'ndnb.lecturas';
 const SIETE_DIAS = 7 * 24 * 3600 * 1000;
 
 const $ = (id) => document.getElementById(id);
@@ -183,16 +183,16 @@ function pintarLista() {
   const nodos = [];
 
   if (sel.destacadas?.length) {
-    nodos.push(el('h2', { class: 'titulo-bloque', text: 'Lo más cubierto' }));
+    nodos.push(el('h2', { class: 'titulo-bloque', text: 'El chisme del día (lo más cubierto)' }));
     for (const e of sel.destacadas) nodos.push(tarjeta(e, yaLeidas, true));
-    if (visibles.length) nodos.push(el('h2', { class: 'titulo-bloque', text: 'Lo más reciente' }));
+    if (visibles.length) nodos.push(el('h2', { class: 'titulo-bloque', text: 'Recién salido' }));
   }
   for (const e of visibles) nodos.push(tarjeta(e, yaLeidas, false));
   lista.replaceChildren(...nodos);
 
   const mostradas = [...(sel.destacadas ?? []), ...visibles];
   $('estado').hidden = mostradas.length > 0;
-  $('estado').textContent = 'No hay notas con esos filtros.';
+  $('estado').textContent = 'Nada por aquí, bestie. Prueba con otros filtros.';
   $('mas').hidden = sel.lista.length <= estado.limite;
 
   const conteo = contarLados(mostradas.flatMap((e) => e.notas));
@@ -281,7 +281,7 @@ async function cargar() {
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     datos = await r.json();
   } catch {
-    if (!datos) $('estado').textContent = 'Todavía no hay noticias publicadas. La primera actualización tarda unos minutos.';
+    if (!datos) $('estado').textContent = 'Todavía no hay noticias, bestie. La primera actualización tarda unos minutos.';
     return;
   }
   porId = new Map(datos.noticias.map((n) => [n.id, n]));

@@ -5,7 +5,7 @@
   --tinta: #1b1a18;
   --tenue: #655f56;
   --linea: #dcd5c7;
-  --acento: #1b1a18;
+  --acento: #2f7d4f;
   --sube: #17703f;
   --baja: #b3261e;
   --o-izquierda: #b3262d;
@@ -23,7 +23,7 @@
     --tinta: #ece8df;
     --tenue: #a39d92;
     --linea: #33373d;
-    --acento: #ece8df;
+    --acento: #6fcf97;
     --sube: #5fcf8f;
     --baja: #ff8a80;
     --o-izquierda: #ef6b70;
@@ -49,6 +49,7 @@ a { color: inherit; }
 /* Cabecera */
 .cabecera { text-align: center; padding: 22px 0 16px; border-bottom: 3px double var(--linea); }
 .cabecera h1 { font: 700 clamp(2.3rem, 9vw, 3.4rem)/1 var(--serif); letter-spacing: -0.02em; margin: 4px 0 6px; }
+.cabecera .hoja { color: var(--acento); display: inline-block; vertical-align: 0.02em; margin: 0 -0.04em; }
 .fecha { margin: 0; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tenue); }
 .lema { margin: 0; color: var(--tenue); font: italic 0.98rem var(--serif); }
 
